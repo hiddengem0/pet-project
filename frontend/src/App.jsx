@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 function App() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const navigate = useNavigate();
 
   // handles user registration
   const handleRegister = async () => {
@@ -35,9 +37,11 @@ function App() {
       });
 
       const data = await response.json();
+
       if (response.ok) {
         localStorage.setItem("token", data.token);
-        setMessage("Login successful!");
+        localStorage.setItem("username", username);
+        navigate("/Welcome");
       } else {
         setMessage(data.error || "Login failed");
       }
