@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import petProfiles from "./data/petProfiles";
+import petProfiles from "./data/petprofiles";
 import "./Home.css";
 
 function Home() {

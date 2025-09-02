@@ -41,7 +41,7 @@ function App() {
       if (response.ok) {
         localStorage.setItem("token", data.token);
         localStorage.setItem("username", username);
-        navigate("/Welcome");
+        navigate("/welcome");
       } else {
         setMessage(data.error || "Login failed");
       }

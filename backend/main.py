@@ -50,7 +50,7 @@ def login():
         return jsonify({"error": "Invalid username or password"}), 401
 
   
-    access_token = create_access_token(identity=user.id)
+    access_token = create_access_token(identity=f"{user.id}")
     return jsonify({"message": "Login successful", "token": access_token}), 200 # to be changed
 
 @app.route("/api/profile", methods=["GET"])
