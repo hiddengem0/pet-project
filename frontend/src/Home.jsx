@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import petProfiles from "./data/petprofiles";
 import "./Home.css";
@@ -6,6 +6,7 @@ import "./Home.css";
 function Home() {
   const[currentIndex, setCurrentIndex] = useState(0);
   const[ShowInfo, setShowInfo] = useState(false);
+  const navigate = useNavigate();
 
   const[favourites, setfavourites] = useState(() => { // ui update
     const saved = localStorage.getItem("favourites"); 
@@ -60,6 +61,10 @@ function Home() {
             {isFavourite ? "❤️" : "🤍"}
           </button>
         </div>
+
+        <Link to="/profile">
+      <button>profile</button>
+    </Link>
 
         <div className="button-group">
           <button onClick={Previous}>Previous</button>
