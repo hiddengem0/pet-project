@@ -49,7 +49,7 @@ function Home() {
       <div className="profile-section">
         <div className="profile-card">
           <img
-            src={currentProfile.image}
+            src={currentProfile.image2}
             alt={currentProfile.name}
             className="profile-img"
             onClick={toggleinfo}
