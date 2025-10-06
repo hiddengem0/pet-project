@@ -25,7 +25,20 @@ function Home() {
     const petName = currentProfile.name;
     if (favourites.includes(petName)) {
         setfavourites(favourites.filter((name) => name !==petName)); //clear
-    } 
+    }
+  }
+
+  const favouriteprofiles = petProfiles.filter((pet) =>
+    favourites.includes(pet.name)
+  );
+
+  if (favouriteprofiles.length === 0) {
+    return (
+      <div className="home-container">
+        <h2>No favourites yet ❤️</h2>
+        <button onClick={() => navigate("/home")}>Back to all pets</button>
+      </div>
+    );
   }
 
   const Next = () => {
@@ -41,7 +54,7 @@ function Home() {
     setShowInfo(false)
   };
 
-  const currentProfile = petProfiles[currentIndex];
+  const currentProfile = favouriteprofiles[currentIndex];
   const isFavourite = favourites.includes(currentProfile.name); // checks if already in favourites
 
     return (
@@ -55,10 +68,14 @@ function Home() {
             onClick={toggleinfo}
             style={{ cursor: "pointer" }}
           />
-          <button className="unfavbutton" onClick={removefav}>
-            {isFavourite ? "❌" : "REFRESH"} 
+          <button className="favbutton" onClick={removefav}>
+            ❌
           </button>
         </div>
+
+        <Link to="/home">
+      <button>Home</button>
+    </Link>
 
         <div className="button-group">
           <button onClick={Previous}>Previous</button>
@@ -77,9 +94,3 @@ function Home() {
 }
 
 export default Home;
-
-// --- edits to be --- 
-// reformat home page 
-// add wallpaper for welcome and reformat
-// create profile page
-
