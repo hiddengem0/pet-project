@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import petProfiles from "./data/petprofiles";
 import "./Home.css";
 
@@ -28,9 +28,8 @@ function Home() {
     }
   }
 
-  const favouriteprofiles = petProfiles.filter((pet) =>
-    favourites.includes(pet.name)
-  );
+  const favouriteprofiles = useMemo(() => petProfiles.filter((pet) => 
+    favourites.includes(pet.name)), [favourites]);
 
   if (favouriteprofiles.length === 0) {
     return (
