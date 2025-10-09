@@ -4,34 +4,27 @@ import petProfiles from "./data/petprofiles";
 import "./Home.css";
 
 function Home() {
-  const[currentIndex, setCurrentIndex] = useState(0);
-  const[ShowInfo, setShowInfo] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [ShowInfo, setShowInfo] = useState(false);
   const navigate = useNavigate();
 
-  const[favourites, setfavourites] = useState(() => { // ui update
-    const saved = localStorage.getItem("favourites"); 
-    return saved ? JSON.parse(saved) : []; // returns info or nothing, returning [] prevents crash from null
+  const [favourites, setfavourites] = useState(() => {
+    const saved = localStorage.getItem("favourites");
+    return saved ? JSON.parse(saved) : []; // prevents null crash
   });
 
   useEffect(() => {
     localStorage.setItem("favourites", JSON.stringify(favourites));
   }, [favourites]);
-  
- const toggleinfo = () => {
-    setShowInfo((prev) => !prev );
-  };
 
-  const removefav = () => {
-    const petName = currentProfile.name;
-    if (favourites.includes(petName)) {
-        setfavourites(favourites.filter((name) => name !==petName)); //clear
-    }
-  }
+  const favouriteprofiles = useMemo(
+    () => petProfiles.filter((pet) => favourites.includes(pet.name)),
+    [favourites]
+  );
 
-  const favouriteprofiles = useMemo(() => petProfiles.filter((pet) => 
-    favourites.includes(pet.name)), [favourites]);
+  const currentProfile = favouriteprofiles[currentIndex];
 
-  if (favouriteprofiles.length === 0) {
+  if (!currentProfile) {
     return (
       <div className="home-container">
         <h2>No favourites yet ❤️</h2>
@@ -40,23 +33,34 @@ function Home() {
     );
   }
 
+  const toggleinfo = () => {
+    setShowInfo((prev) => !prev);
+  };
+
+  const removefav = () => {
+    const petName = currentProfile.name;
+    if (favourites.includes(petName)) {
+      setfavourites(favourites.filter((name) => name !== petName)); // remove
+    }
+  };
+
   const Next = () => {
-    setCurrentIndex((prevIndex) => 
-      prevIndex >= petProfiles.length - 1 ? 0 : prevIndex + 1
+    setCurrentIndex((prevIndex) =>
+      prevIndex >= favouriteprofiles.length - 1 ? 0 : prevIndex + 1
     );
-    setShowInfo(false)
+    setShowInfo(false);
   };
 
   const Previous = () => {
-    setCurrentIndex((prevIndex) => prevIndex === 0 ? petProfiles.length - 1 : prevIndex - 1
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? favouriteprofiles.length - 1 : prevIndex - 1
     );
-    setShowInfo(false)
+    setShowInfo(false);
   };
 
-  const currentProfile = favouriteprofiles[currentIndex];
-  const isFavourite = favourites.includes(currentProfile.name); // checks if already in favourites
+  const isFavourite = favourites.includes(currentProfile.name);
 
-    return (
+  return (
     <div className="home-container">
       <div className="profile-section">
         <div className="profile-card">
@@ -73,8 +77,8 @@ function Home() {
         </div>
 
         <Link to="/home">
-      <button>Home</button>
-    </Link>
+          <button>Home</button>
+        </Link>
 
         <div className="button-group">
           <button onClick={Previous}>Previous</button>
