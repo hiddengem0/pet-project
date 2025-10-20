@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
+import AppViewing from "./appViewing";
 
 function App() {
   const [username, setUsername] = useState("");
@@ -50,25 +51,16 @@ function App() {
     }
   };
 
-  return (
-    <div style={{ padding: "20px" }}>
-      <h2>Set up a profile</h2>
-      <input
-        type="text"
-        placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      /><br />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      /><br />
-      <button onClick={handleRegister}>Register</button>
-      <button onClick={handleLogin}>Login</button>
-      <p>{message}</p>
-    </div>
+   return (
+    <AppViewing
+      username={username}
+      setUsername={setUsername}
+      password={password}
+      setPassword={setPassword}
+      handleRegister={handleRegister}
+      handleLogin={handleLogin}
+      message={message}
+    />
   );
 }
 

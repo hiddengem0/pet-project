@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-//import img wallpaper
+import WelcomeViewing from "./welcomeViewing.jsx";
 import { useState, useEffect } from 'react';
 
 function Welcome() {
@@ -41,14 +41,7 @@ function Welcome() {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
 
-  return (
-    <div className="welcome-container" style={{ textAlign: "center", marginTop: "50px" }}>
-      <h1>Welcome, {username}</h1>
-      <Link to="/Home">
-        <button>View</button>
-      </Link>
-    </div>
-  );
+  return <WelcomeViewing username={username} />;
 }
 
 export default Welcome;

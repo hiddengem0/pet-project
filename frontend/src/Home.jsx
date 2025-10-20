@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import petProfiles from "./data/petprofiles";
-import "./Home.css";
+import HomeViewing from "./homeViewing.jsx";
 
 function Home() {
   const[currentIndex, setCurrentIndex] = useState(0);
@@ -47,38 +47,15 @@ function Home() {
   const isFavourite = favourites.includes(currentProfile.name); // checks if already in favourites
 
     return (
-    <div className="home-container">
-      <div className="profile-section">
-        <div className="profile-card">
-          <img
-            src={currentProfile.image}
-            alt={currentProfile.name}
-            className="profile-img"
-            onClick={toggleinfo}
-            style={{ cursor: "pointer" }}
-          />
-          <button className="favbutton" onClick={togglefav}>
-            {isFavourite ? "❤️" : "🤍"}
-          </button>
-        </div>
-
-        <Link to="/profile">
-      <button>profile</button>
-    </Link>
-
-        <div className="button-group">
-          <button onClick={Previous}>Previous</button>
-          <button onClick={Next}>Next</button>
-        </div>
-      </div>
-
-      {ShowInfo && (
-        <div className="profile-details">
-          <h2>{currentProfile.name}</h2>
-          <p>{currentProfile.info}</p>
-        </div>
-      )}
-    </div>
+    <HomeViewing
+      currentProfile={currentProfile}
+      toggleinfo={toggleinfo}
+      togglefav={togglefav}
+      isFavourite={isFavourite}
+      Previous={Previous}
+      Next={Next}
+      ShowInfo={ShowInfo}
+    />
   );
 }
 
