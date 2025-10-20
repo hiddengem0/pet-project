@@ -5,7 +5,7 @@ function AppViewing({
   setPassword, 
   handleRegister, 
   handleLogin, 
-  message 
+  errormessage 
 }) {
   return (
     <div className="min-h-screen flex items-center justify-center bg-indigo-100 p-6">
@@ -48,8 +48,7 @@ function AppViewing({
           </button>
         </div>
 
-        {/* Message */}
-        {message && (
+        {errormessage && (
           <p className="text-center text-red-500 font-medium">{message}</p>
         )}
       </div>
