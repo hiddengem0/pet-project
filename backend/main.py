@@ -1,11 +1,3 @@
-# venv\Scripts\activate
-# python main.py
-# $env:FLASK_APP = "main" # flask routes
-# npm run dev
-
-# TESTER
-# TESTPASSWORD
-
 from flask import Flask, request, jsonify 
 from flask_cors import CORS 
 from werkzeug.security import generate_password_hash, check_password_hash  

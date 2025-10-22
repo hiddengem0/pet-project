@@ -1,11 +1,3 @@
-// venv\Scripts\activate
-// python main.py
-// // $env:FLASK_APP = "main" # flask routes
-// npm run dev
-
-// TESTER
-// TESTPASSWORD
-
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'

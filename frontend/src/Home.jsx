@@ -60,9 +60,3 @@ function Home() {
 }
 
 export default Home;
-
-// --- plans --- 
-// reformat home page 
-// add wallpaper for welcome and reformat
-// create profile page
-
