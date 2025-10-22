@@ -20,8 +20,14 @@ function Home() {
 
   const favouriteprofiles = useMemo(
     () => petProfiles.filter((pet) => favourites.includes(pet.name)),
-    [favourites]
+    [favourites],
   );
+
+  useEffect(() => {
+    if (currentIndex >= favouriteprofiles.length) {
+      setCurrentIndex(favouriteprofiles.length - 1);
+    }
+  }, [currentIndex, favouriteprofiles]);
 
   const currentProfile = favouriteprofiles[currentIndex];
 
@@ -38,14 +44,14 @@ function Home() {
 
   const Next = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex >= favouriteprofiles.length - 1 ? 0 : prevIndex + 1
+      prevIndex >= favouriteprofiles.length - 1 ? 0 : prevIndex + 1,
     );
     setShowInfo(false);
   };
 
   const Previous = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? favouriteprofiles.length - 1 : prevIndex - 1
+      prevIndex === 0 ? favouriteprofiles.length - 1 : prevIndex - 1,
     );
     setShowInfo(false);
   };
